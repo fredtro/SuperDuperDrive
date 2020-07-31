@@ -17,15 +17,16 @@ import java.util.List;
 public class FileService {
 
     private final FileMapper fileMapper;
+    private final UserService userService;
 
-    public void store(MultipartFile file, User user) {
+    public void store(MultipartFile file) {
         try {
             File newFile = File.builder()
                     .fileData(file.getBytes())
                     .contentType(file.getContentType())
                     .fileSize(file.getSize())
                     .fileName(file.getOriginalFilename())
-                    .userId(user.getUserId())
+                    .userId(userService.getCurrentUser().getUserId())
                     .build();
 
             fileMapper.insert(newFile);
@@ -34,8 +35,11 @@ public class FileService {
         }
     }
 
-    public List<File> getAll(User user) {
-        return fileMapper.getFiles(user.getUserId());
+    public List<File> getAll() {
+        return fileMapper.getFiles(userService.getCurrentUser().getUserId());
     }
 
+    public void delete(Integer fileId) {
+        fileMapper.delete(fileId);
+    }
 }
