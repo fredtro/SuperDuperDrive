@@ -10,11 +10,43 @@
     </head>
     <body class="p-3 mb-2 bg-light text-black">
         <div class="container">
-            <div id="logoutDiv">
-                <form th:action="@{/logout}" method="POST">
-                    <button id="logout-button" type="submit" class="btn btn-secondary float-right">Logout</button>
-                </form>
+            <div class="container">
+                <div class="row">
+                    <div id="logoutDiv" class="col-sm-12">
+                        <form th:action="@{/logout}" method="POST">
+                            <button id="logout-button" type="submit" class="btn btn-secondary float-right">Logout</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row" th:if="${error}">
+                    <div id="error-msg" class="alert alert-danger col-sm-12">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <span th:text="${error}" />
+                    </div>
+                </div>
+
+                <div class="row" th:if="${success}">
+                    <div id="success-msg" class="alert alert-success col-sm-12">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <span th:text="${success}" />
+                    </div>
+                </div>
+
+                <div class="row" th:if="${warning}">
+                    <div id="warning-msg" class="alert alert-warning col-sm-12">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <span th:text="${warning}" />
+                    </div>
+                </div>
             </div>
+
             <div id="contentDiv" style="clear: right;">
                 <nav style="clear: right;">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -36,24 +68,6 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <button type="submit" class="btn btn-dark">Upload</button>
-                                    </div>
-                                </div>
-
-                                <div class="row" th:if="${error}">
-                                    <div id="error-msg" class="alert alert-danger col-sm-12">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <span th:text="${error}" />
-                                    </div>
-                                </div>
-
-                                <div class="row" th:if="${success}">
-                                    <div id="error-msg" class="alert alert-success col-sm-12">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <span th:text="${success}" />
                                     </div>
                                 </div>
                             </div>
@@ -95,13 +109,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr th:each="note: ${notes}">
                                         <td>
-                                            <button type="button" class="btn btn-success">Edit</button>
-                                            <a class="btn btn-danger">Delete</a>
+                                            <button type="button" class="btn btn-success" th:attr="onclick=|showNoteModal('${note.noteId}', '${note.noteTitle}', '${note.noteDescription}')|">Edit</button>
+                                            <form style="display: inline-block" method="get" action="#" th:action="@{/note/{id}/delete(id=${note.getNoteId()})}">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
                                         </td>
-                                        <th scope="row">Example Note Title</th>
-                                        <td>Example Note Description </td>
+                                        <th scope="row" th:text="${note.noteTitle}" />
+                                        <td th:text="${note.noteDescription}" />
                                     </tr>
                                 </tbody>
                             </table>
@@ -117,7 +133,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="#" method="POST">
+                                        <form action="#" th:action="@{/note}" method="POST">
                                             <input type="hidden" name="noteId" id="note-id">
                                             <div class="form-group">
                                                 <label for="note-title" class="col-form-label">Title</label>
@@ -228,6 +244,20 @@
                 $('#credential-password').val(password ? password : '');
                 $('#credentialModal').modal('show');
             }
+
+
+            (function () {
+                // Javascript to enable link to tab
+                const url = document.location.toString();
+                if (url.match('#')) {
+                    $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+                }
+
+                // Change hash for page-reload
+                $('.nav-tabs a').on('shown.bs.tab', function (e) {
+                    window.location.hash = e.target.hash;
+                })
+            }());
         </script>
     </body>
 </html>
