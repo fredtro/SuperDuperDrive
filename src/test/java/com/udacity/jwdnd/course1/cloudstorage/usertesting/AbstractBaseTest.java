@@ -1,6 +1,5 @@
-package com.udacity.jwdnd.course1.cloudstorage.controller;
+package com.udacity.jwdnd.course1.cloudstorage.usertesting;
 
-import com.udacity.jwdnd.course1.cloudstorage.controller.login.LoginPage;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -13,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public abstract class AbstractSecurityTest {
+public abstract class AbstractBaseTest {
 
     @LocalServerPort
     protected Integer port;

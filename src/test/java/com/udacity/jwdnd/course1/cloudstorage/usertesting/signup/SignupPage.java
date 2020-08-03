@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.course1.cloudstorage.controller.signup;
+package com.udacity.jwdnd.course1.cloudstorage.usertesting.signup;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import lombok.Getter;

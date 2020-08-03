@@ -1,13 +1,13 @@
-package com.udacity.jwdnd.course1.cloudstorage.controller.login;
+package com.udacity.jwdnd.course1.cloudstorage.usertesting.login;
 
-import com.udacity.jwdnd.course1.cloudstorage.controller.AbstractSecurityTest;
+import com.udacity.jwdnd.course1.cloudstorage.usertesting.AbstractBaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class LoginControllerTest extends AbstractSecurityTest {
+class LoginControllerTest extends AbstractBaseTest {
 
     private LoginPage loginPage;
 

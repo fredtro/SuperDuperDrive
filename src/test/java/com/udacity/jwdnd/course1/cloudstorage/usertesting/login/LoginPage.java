@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.course1.cloudstorage.controller.login;
+package com.udacity.jwdnd.course1.cloudstorage.usertesting.login;
 
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
