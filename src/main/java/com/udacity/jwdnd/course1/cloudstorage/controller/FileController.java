@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,12 +23,20 @@ public class FileController {
     private final FileService fileService;
 
     @PostMapping("/upload")
-    public String handleUpload(@RequestParam("fileUpload") MultipartFile file, ModelMap model) {
+    public String handleUpload(@RequestParam("fileUpload") MultipartFile file, RedirectAttributes model) {
         if (!fileService.isFileNameAvailable(file.getOriginalFilename())) {
-            return "redirect:/home?uploadError";
+            model.addFlashAttribute("error", "Filename already in use. Please choose something else.");
+            return "redirect:/home";
+        }
+        
+        if (file.isEmpty()) {
+            model.addFlashAttribute("error", "Please select a file.");
+            return "redirect:/home";
         }
 
         fileService.store(file);
+        model.addFlashAttribute("success", "File uploaded to SuperDuperDrive! 🥳.");
+
         return "redirect:/home";
     }
 

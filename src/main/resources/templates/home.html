@@ -39,12 +39,21 @@
                                     </div>
                                 </div>
 
-                                <div class="row" th:if="${param.uploadError}">
+                                <div class="row" th:if="${error}">
                                     <div id="error-msg" class="alert alert-danger col-sm-12">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
-                                        Filename already in use, please retry.
+                                        <span th:text="${error}" />
+                                    </div>
+                                </div>
+
+                                <div class="row" th:if="${success}">
+                                    <div id="error-msg" class="alert alert-success col-sm-12">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <span th:text="${success}" />
                                     </div>
                                 </div>
                             </div>
