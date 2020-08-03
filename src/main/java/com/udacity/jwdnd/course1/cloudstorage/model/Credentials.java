@@ -7,9 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Note {
-    private Integer noteId;
-    private String noteTitle;
-    private String noteDescription;
+public class Credentials {
+    private Integer credentialId;
     private Integer userId;
+    private String url;
+    private String username;
+    private String key;
+    private String password;
+    private String passwordPlainText;
 }

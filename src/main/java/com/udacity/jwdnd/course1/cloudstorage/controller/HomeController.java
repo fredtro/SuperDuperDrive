@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
+import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +16,13 @@ public class HomeController {
 
     private final FileService fileService;
     private final NoteService noteService;
+    private final CredentialsService credentialsService;
 
     @GetMapping
     public String getHomePage(Model model) {
         model.addAttribute("files", fileService.getAll());
         model.addAttribute("notes", noteService.getAll());
+        model.addAttribute("credentials", credentialsService.getAll());
         return "home";
     }
 }
