@@ -38,6 +38,15 @@
                                         <button type="submit" class="btn btn-dark">Upload</button>
                                     </div>
                                 </div>
+
+                                <div class="row" th:if="${param.uploadError}">
+                                    <div id="error-msg" class="alert alert-danger col-sm-12">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        Filename already in use, please retry.
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         <div class="table-responsive">

@@ -8,8 +8,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,9 +22,12 @@ public class FileController {
     private final FileService fileService;
 
     @PostMapping("/upload")
-    public String handleUpload(@RequestParam("fileUpload") MultipartFile file) {
-        fileService.store(file);
+    public String handleUpload(@RequestParam("fileUpload") MultipartFile file, ModelMap model) {
+        if (!fileService.isFileNameAvailable(file.getOriginalFilename())) {
+            return "redirect:/home?uploadError";
+        }
 
+        fileService.store(file);
         return "redirect:/home";
     }
 

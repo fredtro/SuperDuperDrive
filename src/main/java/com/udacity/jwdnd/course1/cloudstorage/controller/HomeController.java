@@ -17,6 +17,8 @@ public class HomeController {
     @GetMapping
     public String getHomePage(Model model) {
         model.addAttribute("files", fileService.getAll());
+
+
         return "home";
     }
 }
