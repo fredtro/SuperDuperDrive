@@ -2,7 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
-import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,5 +40,9 @@ public class FileService {
 
     public void delete(Integer fileId) {
         fileMapper.delete(fileId);
+    }
+
+    public File getFile(Integer id) {
+        return fileMapper.getFile(id);
     }
 }

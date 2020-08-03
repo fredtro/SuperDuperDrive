@@ -51,7 +51,7 @@
                                 <tbody>
                                 <tr th:each="file: ${files}">
                                     <td>
-                                        <a target="_blank" class="btn btn-success">View</a>
+                                        <a th:href="@{/file/{id}/download(id=${file.getFileId()})}" target="_blank" class="btn btn-success">View</a>
                                         <form style="display: inline-block" method="get" action="#" th:action="@{/file/{id}/delete(id=${file.getFileId()})}">
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
