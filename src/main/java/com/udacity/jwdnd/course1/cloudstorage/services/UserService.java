@@ -19,6 +19,7 @@ public class UserService {
 
     private final UserMapper userMapper;
     private final HashService hashService;
+    private User currentUser;
 
     public boolean isUsernameAvailable(String username) {
         return userMapper.getUser(username) == null;
@@ -44,6 +45,12 @@ public class UserService {
             throw new SecurityException("Current user can only be fetched in a secured area.");
         }
 
-        return userMapper.getUser(auth.getName());
+        if (currentUser != null && currentUser.getUsername() == auth.getName()) {
+            return currentUser;
+        }
+
+        currentUser = userMapper.getUser(auth.getName());
+
+        return currentUser;
     }
 }
