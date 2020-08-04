@@ -1,7 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage.usertesting.signup;
 
-import com.udacity.jwdnd.course1.cloudstorage.usertesting.AbstractBaseTest;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
+import com.udacity.jwdnd.course1.cloudstorage.usertesting.AbstractBaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

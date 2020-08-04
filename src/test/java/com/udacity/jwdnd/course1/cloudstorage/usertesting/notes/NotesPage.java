@@ -1,6 +1,5 @@
 package com.udacity.jwdnd.course1.cloudstorage.usertesting.notes;
 
-import com.udacity.jwdnd.course1.cloudstorage.model.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;

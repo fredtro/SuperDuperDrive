@@ -1,7 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.usertesting.notes;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.NoteMapper;
-import com.udacity.jwdnd.course1.cloudstorage.model.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.usertesting.AbstractBaseTest;
 import com.udacity.jwdnd.course1.cloudstorage.usertesting.login.LoginPage;
