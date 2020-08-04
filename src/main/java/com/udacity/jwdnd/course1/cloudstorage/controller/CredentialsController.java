@@ -35,7 +35,7 @@ public class CredentialsController {
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable("id") Integer credentialsId, RedirectAttributes model) {
         credentialsService.delete(credentialsId);
-        model.addFlashAttribute("warning", "Note deleted!");
+        model.addFlashAttribute("warning", "Credentials deleted!");
 
         return "redirect:/home#nav-credentials";
     }

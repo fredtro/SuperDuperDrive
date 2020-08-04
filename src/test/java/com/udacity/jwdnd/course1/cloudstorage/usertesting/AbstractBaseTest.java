@@ -28,7 +28,7 @@ public abstract class AbstractBaseTest {
     public static void beforeAll() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 2);
+        wait = new WebDriverWait(driver, 2, 100);
     }
 
     @AfterAll

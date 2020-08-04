@@ -18,6 +18,9 @@ class CredentialControllerTest extends AbstractBaseTest {
 
     private CredentialPage credentialPage;
 
+    @Autowired
+    private CredentialsMapper credentialsMapper;
+
     @BeforeEach
     public void beforeEach() throws InterruptedException {
         driver.get("http://localhost:" + port + "/login");
@@ -28,6 +31,7 @@ class CredentialControllerTest extends AbstractBaseTest {
         driver.get("http://localhost:" + port + "/home");
         credentialPage = new CredentialPage(driver);
         credentialPage.getNavTabButton().click();
+        credentialsMapper.deleteAll();
     }
 
     @Test
@@ -36,7 +40,7 @@ class CredentialControllerTest extends AbstractBaseTest {
         doCreateCredentials(credentials);
 
         List<WebElement> credentialRows = driver.findElement(By.id("credentialTable")).findElements(By.cssSelector("tbody tr"));
-        Assertions.assertEquals(credentialRows.size(), 1);
+        Assertions.assertTrue(credentialRows.size() > 0);
 
         WebElement credentialRow = credentialRows.get(0);
         Assertions.assertEquals(credentialRow.findElement(By.cssSelector("th")).getAttribute("innerText"), credentials.getUrl());
@@ -52,7 +56,6 @@ class CredentialControllerTest extends AbstractBaseTest {
 
     @Test
     void testEdit(){
-
         Credentials credentials = getTestCredentials();
         doCreateCredentials(credentials);
 
@@ -69,6 +72,19 @@ class CredentialControllerTest extends AbstractBaseTest {
                 .getAttribute("innerText");
 
         Assertions.assertEquals("https://udacity.com", url);
+    }
+
+    @Test
+    void testDelete(){
+        Credentials credentials = getTestCredentials();
+        doCreateCredentials(credentials);
+
+        wait.until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector("#credentialTable > tbody > tr > td:nth-child(1) > form > button"))
+        ).click();
+
+        List<WebElement> credentialRows = driver.findElement(By.id("credentialTable")).findElements(By.cssSelector("tbody tr"));
+        Assertions.assertEquals(0, credentialRows.size());
     }
 
     private void doCreateCredentials(Credentials credentials) {

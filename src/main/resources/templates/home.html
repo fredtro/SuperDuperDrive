@@ -173,7 +173,9 @@
                                 <tr th:each="credential: ${credentials}">
                                     <td>
                                         <button type="button" class="btn btn-success" th:attr="onclick=|showCredentialModal('${credential.credentialId}', '${credential.url}', '${credential.username}', '${credential.passwordPlainText}')|">Edit</button>
-                                        <a class="btn btn-danger">Delete</a>
+                                        <form style="display: inline-block" method="get" action="#" th:action="@{/credentials/{id}/delete(id=${credential.getCredentialId()})}">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                     <th scope="row" th:text="${credential.url}" />
                                     <td th:text="${credential.username}" />
