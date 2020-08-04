@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -18,6 +19,7 @@ public abstract class AbstractBaseTest {
     protected Integer port;
 
     protected static WebDriver driver;
+    protected static WebDriverWait wait;
 
     @Autowired
     protected UserService userService;
@@ -26,6 +28,7 @@ public abstract class AbstractBaseTest {
     public static void beforeAll() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 2);
     }
 
     @AfterAll
